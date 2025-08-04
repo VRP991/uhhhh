@@ -1,0 +1,502 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 13%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 13%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 13%;
+    --primary: 210 6% 35%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 25 20% 75%;
+    --secondary-foreground: 0 0% 13%;
+    --muted: 25 15% 70%;
+    --muted-foreground: 210 6% 35%;
+    --accent: 60 100% 43%;
+    --accent-foreground: 0 0% 13%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 25 10% 70%;
+    --input: 25 10% 70%;
+    --ring: 210 6% 35%;
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Cairo", sans-serif;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+/* RTL Support */
+[dir="rtl"] {
+  direction: rtl;
+}
+
+/* Custom scrollbar with brand colors */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #d6b49e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #58595b;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #231f20;
+}
+
+/* Brand-specific animations */
+@keyframes brand-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes brand-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes brand-slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 500px;
+  }
+}
+
+@keyframes brand-float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes brand-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(214, 180, 158, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(214, 180, 158, 0.6);
+  }
+}
+
+.brand-fade-in {
+  animation: brand-fade-in 1.2s ease-out forwards;
+}
+
+.brand-slide-up {
+  animation: brand-slide-up 1s ease-out forwards;
+}
+
+.brand-float {
+  animation: brand-float 4s ease-in-out infinite;
+}
+
+.brand-glow {
+  animation: brand-glow 3s ease-in-out infinite;
+}
+
+.animate-slide-down {
+  animation: brand-slide-down 0.5s ease-out forwards;
+}
+
+/* Animation delays */
+.delay-100 {
+  animation-delay: 100ms;
+}
+.delay-200 {
+  animation-delay: 200ms;
+}
+.delay-300 {
+  animation-delay: 300ms;
+}
+.delay-400 {
+  animation-delay: 400ms;
+}
+.delay-500 {
+  animation-delay: 500ms;
+}
+.delay-600 {
+  animation-delay: 600ms;
+}
+.delay-800 {
+  animation-delay: 800ms;
+}
+.delay-1000 {
+  animation-delay: 1000ms;
+}
+
+/* Enhanced Gallery Preview Animations */
+.gallery-preview-container {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.gallery-preview-image {
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gallery-preview-container:hover .gallery-preview-image {
+  transform: scale(1.05);
+}
+
+.gallery-overlay {
+  transition: all 0.4s ease;
+}
+
+.gallery-preview-container:hover .gallery-overlay {
+  background: linear-gradient(
+    135deg,
+    rgba(214, 180, 158, 0.2) 0%,
+    rgba(88, 89, 91, 0.4) 50%,
+    rgba(35, 31, 32, 0.6) 100%
+  );
+}
+
+.gallery-play-button {
+  width: 80px;
+  height: 80px;
+  background: rgba(214, 214, 5, 0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(214, 214, 5, 0.3);
+}
+
+.gallery-preview-container:hover .gallery-play-button {
+  transform: scale(1.1);
+  background: rgba(214, 214, 5, 1);
+  box-shadow: 0 12px 40px rgba(214, 214, 5, 0.5);
+}
+
+.gallery-play-icon {
+  width: 0;
+  height: 0;
+  border-left: 20px solid #58595b;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  margin-left: 4px;
+}
+
+.gallery-button {
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.gallery-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.gallery-button:hover::before {
+  left: 100%;
+}
+
+/* Brand gradient backgrounds */
+.brand-gradient-primary {
+  background: linear-gradient(135deg, #d6b49e 0%, #c1afa5 50%, #b9b0ad 100%);
+}
+
+.brand-gradient-secondary {
+  background: linear-gradient(135deg, #58595b 0%, #939598 50%, #b9b0ad 100%);
+}
+
+.brand-gradient-accent {
+  background: linear-gradient(135deg, #d6d605 0%, #7f6d4d 100%);
+}
+
+/* Enhanced card styles with brand colors */
+.brand-card {
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid #d6b49e;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+}
+
+.brand-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(88, 89, 91, 0.15);
+  border-color: #58595b;
+}
+
+/* Brand button styles */
+.brand-button-primary {
+  background: linear-gradient(135deg, #58595b 0%, #231f20 100%);
+  color: white;
+  border: none;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.brand-button-primary:hover {
+  background: linear-gradient(135deg, #231f20 0%, #58595b 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(35, 31, 32, 0.3);
+}
+
+.brand-button-secondary {
+  background: linear-gradient(135deg, #d6b49e 0%, #c1afa5 100%);
+  color: #231f20;
+  border: 2px solid #58595b;
+  transition: all 0.3s ease;
+}
+
+.brand-button-secondary:hover {
+  background: linear-gradient(135deg, #c1afa5 0%, #d6b49e 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(214, 180, 158, 0.4);
+}
+
+.brand-button-accent {
+  background: linear-gradient(135deg, #d6d605 0%, #7f6d4d 100%);
+  color: #231f20;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.brand-button-accent:hover {
+  background: linear-gradient(135deg, #7f6d4d 0%, #d6d605 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(214, 214, 5, 0.4);
+}
+
+/* Enhanced form styles */
+.brand-input {
+  border: 2px solid #d6b49e;
+  background: rgba(255, 255, 255, 0.9);
+  transition: all 0.3s ease;
+}
+
+.brand-input:focus {
+  border-color: #58595b;
+  box-shadow: 0 0 0 4px rgba(88, 89, 91, 0.1);
+  background: rgba(255, 255, 255, 1);
+  transform: translateY(-1px);
+}
+
+/* Navigation styles with brand colors */
+.brand-nav {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 2px solid #d6b49e;
+}
+
+.brand-nav-link {
+  color: #58595b;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+}
+
+.brand-nav-link:hover {
+  color: #231f20;
+  background: rgba(214, 180, 158, 0.2);
+}
+
+.brand-nav-link::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  background: #d6d605;
+  transition: all 0.3s ease;
+}
+
+.brand-nav-link:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+/* Section dividers with brand styling */
+.brand-divider {
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #d6b49e, #58595b, #d6b49e, transparent);
+  margin: 4rem 0;
+}
+
+/* Logo container styles */
+.brand-logo-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.brand-logo {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(88, 89, 91, 0.2));
+}
+
+/* Circle indicators with brand colors */
+.brand-circle {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #d6b49e;
+  display: inline-block;
+  margin-right: 0.5rem;
+  box-shadow: 0 2px 4px rgba(214, 180, 158, 0.3);
+}
+
+/* Enhanced responsive design */
+@media (max-width: 768px) {
+  .brand-fade-in,
+  .brand-slide-up {
+    animation-duration: 0.6s;
+  }
+
+  .brand-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .brand-logo {
+    width: 40px;
+    height: 40px;
+  }
+
+  .gallery-play-button {
+    width: 60px;
+    height: 60px;
+  }
+
+  .gallery-play-icon {
+    border-left: 15px solid #58595b;
+    border-top: 9px solid transparent;
+    border-bottom: 9px solid transparent;
+  }
+}
+
+/* Performance optimizations */
+.brand-card,
+.brand-button-primary,
+.brand-button-secondary,
+.brand-button-accent {
+  will-change: transform;
+}
+
+/* Hide scrollbar during video mode */
+body.video-mode {
+  overflow: hidden;
+}
+
+/* Language specific styles */
+.rtl {
+  direction: rtl;
+}
+
+.ltr {
+  direction: ltr;
+}
+
+/* Brand-specific text styles */
+.brand-text-primary {
+  color: #58595b;
+}
+
+.brand-text-secondary {
+  color: #c1afa5;
+}
+
+.brand-text-accent {
+  color: #d6d605;
+}
+
+.brand-text-dark {
+  color: #231f20;
+}
+
+/* Enhanced hero section */
+.brand-hero-overlay {
+  background: linear-gradient(
+    135deg,
+    rgba(214, 180, 158, 0.1) 0%,
+    rgba(88, 89, 91, 0.3) 50%,
+    rgba(35, 31, 32, 0.6) 100%
+  );
+}
+
+/* Service icons with brand styling */
+.brand-service-icon {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #d6b49e 0%, #c1afa5 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(214, 180, 158, 0.3);
+}
+
+.brand-service-icon:hover {
+  background: linear-gradient(135deg, #58595b 0%, #939598 100%);
+  transform: scale(1.1);
+  box-shadow: 0 8px 25px rgba(88, 89, 91, 0.4);
+}
+
+.brand-service-icon svg {
+  color: #58595b;
+  transition: color 0.3s ease;
+}
+
+.brand-service-icon:hover svg {
+  color: white;
+}
